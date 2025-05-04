@@ -1,16 +1,15 @@
-# Quick Tap Service
+# QuickTap Service
 
-This is an open-source implementation of the Pixel Quick Tap gesture, written from scratch for portability and customizability.
+**QuickTap Service** is a fully open-source implementation of the Pixel "Quick Tap" gesture, developed from scratch for enhanced portability and customizability.
 
-Quick Tap, codename Columbus, is a gesture powered by AP sensors and CHRE sensor on the Pixel 4a (5G) and later that is used to activate the Google Assistant on stock.
+Originally introduced on the Pixel 4a (5G) and later under the codename *Columbus*, this gesture uses AP and CHRE sensors to trigger predefined actions—such as launching Google Assistant—via a double tap on the back of the device.
 
-This app is a reverse-engineered Android client that runs as a standalone service and talks to the AP sensor and CHRE sensor for gesture functionality.
+This project provides a reverse-engineered Android service that replicates and extends this functionality, integrating directly with the system for a seamless user experience.
 
 ## Features
-
-- Seamless integration in Settings → System → Gestures → Quick Tap with no extra changes
-- Integration with Settings search
-- Many actions to perform on gesture trigger
+  - Seamless integration in Settings → System → Gestures → Quick Tap with no extra changes
+  - Integration with Settings search
+  - Many actions to perform on gesture trigger
   - Take screenshot
   - Open assistant
   - Play or pause media
@@ -21,21 +20,21 @@ This app is a reverse-engineered Android client that runs as a standalone servic
   - Toggle power menu
   - Toggle screen
   - Launch app
-- Setting to control whether gesture is enabled when the screen is off
-- Contextually-appropriate haptic feedback with modern effects
+  - Setting to control whether gesture is enabled when the screen is off
+  - Contextually-appropriate haptic feedback with modern effects
   - Heavy click for back tap
   - Reject for unavailable action (e.g. if flashlight can't turn on because camera is in use)
 
 ## Integration
 
-Sync this repo to packages/apps/ColumbusService.
+Sync this repo to packages/services/QuickTap.
 
 Add the following to your device tree **only for devices with this feature**:
 
 ```make
 # Quick Tap
 PRODUCT_PACKAGES += \
-    ColumbusService
+    QuickTap
 ```
 
 While this service is designed to be as portable and self-contained as possible, Android does not provide the necessary APIs to implement all gesture actions out-of-the-box. This means that some commits must be added to frameworks/base to expose the APIs for full functionality:
@@ -44,7 +43,7 @@ While this service is designed to be as portable and self-contained as possible,
 - For assistant action: [core: Expose method to start assistant through Binder](https://github.com/ProtonAOSP/android_frameworks_base/commit/2b950e103e865aa6a1fe8a917964e0069d4c4037)
 - For toggle recents action: [core: Expose method to toggle recent apps through Binder](https://github.com/TheParasiteProject/frameworks_base/commit/903aa739452e47b765434cc77a89b6e7f49f972b)
 
-Default settings can be changed by overlaying [res/values/config.xml](https://github.com/TheParasiteProject/packages_apps_ColumbusService/blob/main/res/values/config.xml).
+Default settings can be changed by overlaying [res/values/config.xml](https://github.com/halcyonproject/packages_services_QuickTap/blob/15.1/res/values/config.xml).
 
 ## Acknowledgements
 
